@@ -1,5 +1,5 @@
-const userCardContainer = document.querySelector("[data-user-cards-container]");
-const userCardTemplate = document.querySelector("[data-user-template]");
+const CardContainer = document.querySelector("[data-user-cards-container]");
+const CardTemplate = document.querySelector("[data-user-template]");
 const searchInput = document.querySelector("[data-search]");
 
 let users = [];
@@ -10,7 +10,7 @@ fetch("https://jsonplaceholder.typicode.com/users")
 .then(data => {
   
   users = data.map(user => {
-    const card = userCardTemplate.content.cloneNode(true).children[0];
+    const card = CardTemplate.content.cloneNode(true).children[0];
     
     const header = card.querySelector('[data-header]');
     const body = card.querySelector('[data-body]');
@@ -18,7 +18,7 @@ fetch("https://jsonplaceholder.typicode.com/users")
     header.textContent = user.name;
     body.textContent = user.email;
     
-    userCardContainer.append(card);
+    CardContainer.append(card);
     
     return { name: user.name, email: user.email, element: card };
   });
@@ -27,11 +27,16 @@ fetch("https://jsonplaceholder.typicode.com/users")
 
 
 
-searchInput.addEventListener("input", (e) => {
-  const value = e.target.value.toLowerCase();
+
+searchInput.addEventListener("input", (i) => {
+  const value = i.target.value.toLowerCase();
   
   users.forEach(user => {
-    const isVisible = user.name.toLowerCase().includes(value) || user.email.toLowerCase().includes(value);
+
+    const userName = user.name.toLowerCase();
+    const userEmail = user.email.toLowerCase();
+
+    const isVisible = userName.includes(value) || userEmail.includes(value);
     
     user.element.classList.toggle("hide", !isVisible);
   });
