@@ -23,15 +23,20 @@ input {
   padding: .5rem;
 } 
 
-.card > .header {
+.card > .name {
   margin-bottom: .25rem;
 }
 
-.card > .body {
+.card > .email {
   font-size: .8rem;
   color: #777;
 }
 
 .hide {
   display: none;
+}
+
+.highlight {
+  color: rgb(38, 0, 225);
+  font-weight: bold;
 }
